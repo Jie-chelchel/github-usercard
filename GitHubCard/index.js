@@ -35,6 +35,7 @@ const makeCard = function (user) {
     .then((res) => {
       //set vaule
       const data = res.data;
+      // console.log(data);
       const card = document.createElement("div");
       card.classList.add("card");
       const img = document.createElement("img");
@@ -50,8 +51,14 @@ const makeCard = function (user) {
       userName.textContent = data.login;
       const location = document.createElement("p");
       location.textContent = `Location: ${data.location}`;
+
       const profile = document.createElement("p");
-      profile.textContent = `Profile: ${data.html_url}`;
+      const aLink = document.createElement("a");
+      aLink.href = data.html_url;
+      aLink.innerHTML = data.html_url;
+      profile.innerHTML = "Profile: ";
+      profile.appendChild(aLink);
+
       const followers = document.createElement("p");
       followers.textContent = `Followers: ${data.followers}`;
       const following = document.createElement("p");
@@ -68,14 +75,13 @@ const makeCard = function (user) {
       cardInfo.append(following);
       cardInfo.append(bio);
       card.append(cardInfo);
-      console.log(card);
+      // console.log(card);
       //append cards
       const cardsContainer = document.querySelector(".cards");
       cardsContainer.appendChild(card);
     })
     .catch((err) => console.log(err.message, `wrong lllll`));
 };
-makeCard("jie-chelchel");
 const followersArray = [
   "rkshockey",
   "D2MBingo5",
